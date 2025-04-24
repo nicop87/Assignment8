@@ -1,4 +1,5 @@
-# TCPassignment
+# IOT Implementation 
+By Leo Pan and Nicolas Piker for CECS 327
 
 ## Opening a port
 In order to use this code, first you need access to the router that you are currently using. When you are in the settings, you need to allows a port to forward to your computer. Make sure to use a port that is not in use for another task.

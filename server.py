@@ -1,39 +1,45 @@
+import socket
 import ipaddress
-import socket 
 
-#creates a socket
-myTCPSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# main function for Server driver
+if __name__ == "__main__":
 
-#asks for which port to connect to 
-target_IP = input("What ip address would you like to connect to? ")
-port = int(input("What port would you like to connect to? "))
-#connects the socket to a specific port on the computer
-myTCPSocket.bind((target_IP, port))
+    # creates the TCP socket
+    myTCPSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-#waits for a connection to be initiated 
-myTCPSocket.listen(5)
+    # prompts user for the current ip address the server is on, and what port to open to TCP connections
+    myIP = input("Current IP address: ")
+    myPort = int(input("Port to open: "))
 
-#when it gets a connection it accepts it 
-incomingSocket, incomingAddress = myTCPSocket.accept()
+    # binds my socket to the given ip and port number of the machine
+    myTCPSocket.bind((myIP, myPort))
 
-#continuously waiting for a message
-while True:
+    # tells it to listen for any connections, sets backlog to 5
+    myTCPSocket.listen(5)
 
-    #gets the message, have to use decode to get rid of the 'b'
-    myData = str(incomingSocket.recv(500).decode())
+    # logs the socket and ip address of any accepted connections
+    incomingSocket, incomingAddress = myTCPSocket.accept()
 
-    #once the client ends it on their side it will send empty messages to the server
-    if myData == '':
-        break
+    # continuous loop to listena nd respond to connections
+    while True:
+        # recieves data from client
+        myData = incomingSocket.recv(100).decode()
 
+        # also checks if the message sent is an empty array
+        # to see if the client closed the connection normally, it will error if it was abrupt
+        if myData == "":
+            print("Client ended session, terminating connection")
+            break
 
-    print("UNCHANGED: ", myData)
+        # prints the incoming message
+        print("CLIENT: ", myData)
 
-    #changes the message to all capital letters
-    myData = myData.upper()
-    print("ALTERED: ", myData)
+        # converts recieved message into all upper case and sends it back to sender
+        new_msg = myData.upper()
+        incomingSocket.send(bytearray(str(new_msg), encoding='utf-8'))
+        print("SENDING RESPONSE...")
+        print()
 
-    #sends the message to the connected socket
-    incomingSocket.send(bytearray(str(myData), encoding='utf-8'))
-
+    # terminate connection safely, although this code won't reach here due to the infinite loop
+    incomingSocket.close()
 
