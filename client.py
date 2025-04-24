@@ -9,12 +9,22 @@ if __name__ == "__main__":
     validMessage = ['What is the average moisture inside my kitchen fridge in the past three hours?',
                     'What is the average water consumption per cycle in my smart dishwasher?',
                     'Which device consumed more electricity among my three IoT devices (two refrigerators and a dishwasher)?']
-    message = input("What is your question? ")
-    while message not in validMessage:
+    print("Here are the valid questions: ")
+    num=1
+    for i in validMessage:
+        print(str(num) + '. ' + i)
+        num+=1
+    try:
+        message = int(input())
+    except:
+        message = int(input('Please choose either 1, 2, or 3: '))
+    while (message > 4 and message < 0):
         print('Sorry, this query cannot be processed. Please try one of the following:')
+        num = 1
         for i in validMessage:
-            print(i)
-        message = input()
+            print(str(num) + '. ' + i)
+            num+=1
+        message = int(input())
 
     # creates the socket for our communication
     myTCPSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -28,9 +38,6 @@ if __name__ == "__main__":
         #if there is an error with connecting
         except:
             print("An error has occurred please try again")
-            target_IP = input("Please enter the target ip address: ")
-            target_port = int(input("Please enter the target port number of the server: "))
-            message = input("What is your message? ")
 
     #loop to send and recieve the messages 
     while True:
