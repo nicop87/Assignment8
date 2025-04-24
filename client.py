@@ -4,9 +4,17 @@ import socket
 
 if __name__ == "__main__":
     # recieves input from client which contains the IP address, port number of the server, and a message to send to that server
-    target_IP = input("Please enter the target ip address: ")
-    target_port = int(input("Please enter the target port number of the server: "))
-    message = input("What is your message? ")
+    target_IP = input("FIX THIS ")
+    target_port = int(input("FIX THIS "))
+    validMessage = ['What is the average moisture inside my kitchen fridge in the past three hours?',
+                    'What is the average water consumption per cycle in my smart dishwasher?',
+                    'Which device consumed more electricity among my three IoT devices (two refrigerators and a dishwasher)?']
+    message = input("What is your question? ")
+    while message not in validMessage:
+        print('Sorry, this query cannot be processed. Please try one of the following:')
+        for i in validMessage:
+            print(i)
+        message = input()
 
     # creates the socket for our communication
     myTCPSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
