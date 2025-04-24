@@ -1,5 +1,8 @@
 import socket
 import ipaddress
+import psycopg2
+import os
+from dotenv import load_env
 
 # main function for Server driver
 if __name__ == "__main__":
@@ -8,8 +11,8 @@ if __name__ == "__main__":
     myTCPSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # prompts user for the current ip address the server is on, and what port to open to TCP connections
-    myIP = input("Current IP address: ")
-    myPort = int(input("Port to open: "))
+    myIP = input("FIX ME")
+    myPort = int(input("FIX ME"))
 
     # binds my socket to the given ip and port number of the machine
     myTCPSocket.bind((myIP, myPort))
