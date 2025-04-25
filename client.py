@@ -46,7 +46,12 @@ if __name__ == "__main__":
         
         #recieves and prints the response
         response = myTCPSocket.recv(500).decode()
-        print("Returned message: ", response)
+        if message == 1:
+            print("The average moisture inside the kitchen is " + response)
+        elif message == 2:
+            print("The average water consumption per cycle in your dishwasher is " + response)
+        else:
+            print("The device that consumed the most electricity is " + response)
 
         #checks to see if the client would want to continue
         if input("Would you like to change your message? (Y/n)").lower() == 'y':
