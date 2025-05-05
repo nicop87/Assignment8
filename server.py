@@ -330,15 +330,10 @@ if __name__ == "__main__":
                 # now just find out which one has the highest kilowatt hour consumption with max
                 most_usage = max(power_use.values())
                 most_appliance = [key for key, value in power_use.items() if value == most_usage]
-                print(most_appliance)
-                print(fridge_names)
-                print(dishwasher_names)
-                print(list(fridge_names.keys()))
-                if(most_appliance in list(fridge_names.keys())):
-                    print("falgggggg")
-                    msg = f"{fridge_names[most_appliance]}: {most_usage} kilowatt hours in a day"
-                elif(most_appliance in list(dishwasher_names.keys())):
-                    msg = f"{dishwasher_names[most_appliance]}: {most_usage} kilowatt hours in a day"
+                if(most_appliance[0] in list(fridge_names.keys())):
+                    msg = f"{fridge_names[most_appliance[0]]}: {most_usage} kilowatt hours in a day"
+                elif(most_appliance[0] in list(dishwasher_names.keys())):
+                    msg = f"{dishwasher_names[most_appliance[0]]}: {most_usage} kilowatt hours in a day"
                 else:
                     msg = "error"
 
