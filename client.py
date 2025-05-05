@@ -56,7 +56,7 @@ if __name__ == "__main__":
         #checks to see if the client would want to continue
         if input("Would you like to change your message? (Y/n)").lower() == 'y':
             print()
-            message = input("What is your new message?")
+            message = int(input("What is your new message?"))
         else:
             break
 

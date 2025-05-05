@@ -336,6 +336,10 @@ if __name__ == "__main__":
                     msg = f"{dishwasher_names[most_appliance[0]]}: {most_usage} kilowatt hours in a day"
                 else:
                     msg = "error"
+            
+            # bad message gets through gets caught here
+            case _:
+                msg = "bad message error"
 
         # prints the incoming message
         print("CLIENT: ", f"Recieved Choice: {myData}")
