@@ -8,8 +8,8 @@ sudo apt install python3-psycopg2
 sudo apt install python3-dotenv
 
 
-## Opening a port
-In order to use this code, first you need access to the router that you are currently using. When you are in the settings, you need to allows a port to forward to your computer. Make sure to use a port that is not in use for another task.
+## Starting the server
+When you run the Python code for server.py, it will open a port on a server in the Google Cloud Workspace so that the client can communicate with the database and receive data.
 
 ## Creating a server
 To create a server, it will ask you for the IP address of your device running the code and a port number. You will use your private IP address and the port number that you opened in the pervious step. You also want to get the public IP address of your computer for the next step.
