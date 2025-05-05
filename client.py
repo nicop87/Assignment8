@@ -4,8 +4,8 @@ import socket
 
 if __name__ == "__main__":
     # recieves input from client which contains the IP address, port number of the server, and a message to send to that server
-    target_IP = input("FIX THIS ")
-    target_port = int(input("FIX THIS "))
+    target_IP = input("Target IP address: ")
+    target_port = int(input("Target Port: "))
     validMessage = ['What is the average moisture inside my kitchen fridge in the past three hours?',
                     'What is the average water consumption per cycle in my smart dishwasher?',
                     'Which device consumed more electricity among my three IoT devices (two refrigerators and a dishwasher)?']
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         #checks to see if the client would want to continue
         if input("Would you like to change your message? (Y/n)").lower() == 'y':
             print()
-            message = input("What is your new message?")
+            message = int(input("What is your new message?"))
         else:
             break
 
