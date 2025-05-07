@@ -3,6 +3,8 @@ import psycopg2
 import os
 import time
 from dotenv import load_dotenv
+import datetime
+import pytz
 
 def refresh_cache(fridge_names, dishwasher_names, fridge_cache, dishwasher_cache):
     # connect to neon database and make cursor to query
@@ -239,6 +241,12 @@ if __name__ == "__main__":
                 # Add up all the moisture readings in the past 3 hours and divide by the count
                 moisture = 0
                 count = 0
+
+                # grabs current time and converts it to 3 hours ago in pst
+                utc_date = datetime.datetime.fromtimestamp(time.time() - (60 * 60 * 3), datetime.timezone.utc).replace(tzinfo=pytz.utc)
+                pst = pytz.timezone("America/Los_Angeles")
+                pst_dt = utc_date.astimezone(pst)
+
                 for row in reversed(fridge_cache):
                     # checks if the entry was actually in the last 3 hours
                     time_elapsed = int(time.time()) - int(row[3])
@@ -249,9 +257,9 @@ if __name__ == "__main__":
                         # if it's not in the last three hours looks like thats it, end for loop and calculate
                         # checks if divide by zero
                         if count == 0:
-                            msg = "N/A."
+                            msg = f"No fridge has been active since {pst_dt.strftime("%Y-%m-%d %H:%M")}"
                         else:
-                            msg = f"{moisture/count}% Relative Humidity"
+                            msg = f"{moisture/count}% Relative Humidity since {pst_dt.strftime("%Y-%m-%d %H:%M")}"
                         break
 
 
