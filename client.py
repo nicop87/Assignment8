@@ -14,18 +14,15 @@ if __name__ == "__main__":
     for i in validMessage:
         print(str(num) + '. ' + i)
         num+=1
-    try:
-        message = int(input())
-    except:
-        message = int(input('Please choose either 1, 2, or 3: '))
-    while (message > 4 or message < 0):
+    message=input()
+    while (message not in ['1','2','3']):
         print('Sorry, this query cannot be processed. Please try one of the following:')
         num = 1
         for i in validMessage:
             print(str(num) + '. ' + i)
             num+=1
-        message = int(input())
-
+        message = (input())
+    message = int(message)
     # creates the socket for our communication
     myTCPSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -55,11 +52,16 @@ if __name__ == "__main__":
 
         #checks to see if the client would want to continue
         if input("Would you like to change your message? (Y/n)").lower() == 'y':
-            print()
-            try:
-                message = int(input('Please choose either 1, 2, or 3: '))
-            except:
-                message = int(input('Please choose either 1, 2, or 3: '))
+            print("Please enter your new selection:")
+            message = input()
+            while message not in ['1','2','3']:
+                print('Please enter one of the valid choices:')
+                num = 1
+                for i in validMessage:
+                    print(str(num) + '. ' + i)
+                    num+=1
+                message=input()
+            message=int(message)
         else:
             break
 
