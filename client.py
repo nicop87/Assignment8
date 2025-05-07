@@ -18,7 +18,7 @@ if __name__ == "__main__":
         message = int(input())
     except:
         message = int(input('Please choose either 1, 2, or 3: '))
-    while (message > 4 and message < 0):
+    while (message > 4 or message < 0):
         print('Sorry, this query cannot be processed. Please try one of the following:')
         num = 1
         for i in validMessage:
@@ -56,7 +56,10 @@ if __name__ == "__main__":
         #checks to see if the client would want to continue
         if input("Would you like to change your message? (Y/n)").lower() == 'y':
             print()
-            message = int(input("What is your new message?"))
+            try:
+                message = int(input('Please choose either 1, 2, or 3: '))
+            except:
+                message = int(input('Please choose either 1, 2, or 3: '))
         else:
             break
 
